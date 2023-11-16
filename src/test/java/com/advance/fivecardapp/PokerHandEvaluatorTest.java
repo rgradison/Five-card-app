@@ -60,6 +60,7 @@ public class PokerHandEvaluatorTest {
         List<Card> hand = Arrays.asList(new Card( "Hearts","8"), new Card( "Hearts","9"), new Card( "Hearts","10"),new Card( "Hearts","Jack"), new Card( "Hearts","Queen"));
         assertEquals("Straight Flush", new PokerHandEvaluator().evaluateHand(hand));
     }
+
     //Royal flush and Straight flush implement the same logic
    @Test
     public void testRoyalFlush() {

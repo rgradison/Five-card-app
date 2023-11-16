@@ -31,16 +31,12 @@ public class Deck {
         }
     }
 
-
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
-    /**
-     * Deals a hand of 5 cards from the deck.
-     *
-     * @return A list representing the dealt hand.
-     */
+    //@return A list representing the dealt hand.
+
     public List<Card> dealHand(int numCards) {
         List<Card> hand = new ArrayList<>();
         for (int i = 0; i < numCards; i++) {
@@ -49,22 +45,17 @@ public class Deck {
         return hand;
     }
 
-    /**
-     * Get the size of the deck.
-     *
-     * @return The number of cards remaining in the deck.
-     */
+    //@return The number of cards remaining in the deck.
+
     public int size() {
         return cards.size();
     }
 
-    /**
-     * Get the list of cards in the deck.
-     *
-     * @return The list of cards in the deck.
-     */
+    //@return The list of cards in the deck.
+
     public List<Card> getCards() {
         return cards;
     }
+
 }
 
