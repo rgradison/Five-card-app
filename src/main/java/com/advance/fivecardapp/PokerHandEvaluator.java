@@ -7,6 +7,7 @@ public class PokerHandEvaluator {
 
     public String evaluateHand(List<Card> hand) {
         System.out.println("Hand baba :" + hand);
+
         if (isStraightFlush(hand)) {
             return "Straight Flush";
         } else if (isFourOfAKind(hand)) {
@@ -15,6 +16,8 @@ public class PokerHandEvaluator {
             return "Full House";
         } else if (isFlush(hand)) {
             return "Flush";
+        }else if (isRoyalFlush(hand)) {
+            return "Royal Flush";
         } else if (isStraight(hand)) {
             return "Straight";
         } else if (isThreeOfAKind(hand)) {
@@ -24,12 +27,26 @@ public class PokerHandEvaluator {
         } else if (isOnePair(hand)) {
             return "One Pair";
         } else {
-            return "High Cards";
+                return "High Cards";
         }
     }
 
     private boolean isStraightFlush(List<Card> hand) {
-        return isStraight(hand) && isFlush(hand);
+        List<String> expectedRanks = Arrays.asList("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A");
+
+        List<Card> sortedHand = hand.stream()
+                .sorted(Comparator.comparingInt(this::getRankValue))
+                .collect(Collectors.toList());
+
+        // Check if the ranks form a sequence
+        for (int i = 0; i < sortedHand.size() - 1; i++) {
+            if (getRankValue(sortedHand.get(i + 1)) - getRankValue(sortedHand.get(i)) != 1) {
+                return false;
+            }
+        }
+       // Check if all cards have the same suit
+        String firstSuit = sortedHand.get(0).getSuit();
+        return sortedHand.stream().allMatch(card -> card.getSuit().equals(firstSuit));
     }
 
     private boolean isFourOfAKind(List<Card> hand) {
@@ -90,6 +107,14 @@ public class PokerHandEvaluator {
 
         return rankCounts.containsValue(2L);
     }
+    //Same as Royal Flush
+    private boolean isRoyalFlush(List<Card> hand) {
+        // Assuming the hand is already a StraightFlush
+        return hand.stream().allMatch(card -> "10JQKA".contains(card.getRank()));
+    }
+
+
+
 
     private int getRankValue(Card card) {
 
