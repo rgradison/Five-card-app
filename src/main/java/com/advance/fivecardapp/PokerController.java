@@ -7,13 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PokerController {
-    @Autowired
     private final PlayPocker playPocker;
-
+    @Autowired
     public PokerController(PlayPocker playPocker) {
         this.playPocker = playPocker;
     }
-
 
     @GetMapping("/evaluatePokerHand")
     public ResponseEntity evaluatePokerHand() {
