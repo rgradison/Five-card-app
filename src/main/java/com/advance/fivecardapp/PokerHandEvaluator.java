@@ -4,6 +4,52 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PokerHandEvaluator {
+    //Badugi logic
+    public String evaluateHand(List<Card> hand, int handSize) {
+        if (handSize == 4) {
+            return evaluateBadugi(hand);
+        } else if (handSize == 5) {
+            return evaluateStandardPokerHand(hand);
+        } else {
+            return "Invalid hand size";
+        }
+    }
+
+    private String evaluateStandardPokerHand(List<Card> hand) {
+        if (isRoyalFlush(hand)) {
+            return "Royal Flush";
+        } else if (isStraightFlush(hand)) {
+            return "Straight Flush";
+        } else if (isFourOfAKind(hand)) {
+            return "Four of a Kind";
+        } else if (isFullHouse(hand)) {
+            return "Full House";
+        } else if (isFlush(hand)) {
+            return "Flush";
+        } else if (isStraight(hand)) {
+            return "Straight";
+        } else if (isThreeOfAKind(hand)) {
+            return "Three of a Kind";
+        } else if (isTwoPair(hand)) {
+            return "Two Pair";
+        } else if (isOnePair(hand)) {
+            return "One Pair";
+        } else {
+            return "High Cards";
+        }
+    }
+    
+    private String evaluateBadugi(List<Card> hand) {
+        // Assuming Badugi rules where the goal is to have the lowest hand with cards of different suits
+        Map<String, Long> suitCounts = hand.stream()
+                .collect(Collectors.groupingBy(Card::getSuit, Collectors.counting()));
+
+        if (suitCounts.values().stream().allMatch(count -> count == 1)) {
+            return "Badugi Hand";
+        } else {
+            return "Not a valid Badugi Hand";
+        }
+    }
 
     public String evaluateHand(List<Card> hand) {
         System.out.println("Hand baba :" + hand);
@@ -113,9 +159,6 @@ public class PokerHandEvaluator {
         return hand.stream().allMatch(card -> "10JQKA".contains(card.getRank()));
     }
 
-
-
-
     private int getRankValue(Card card) {
 
         Map<String, Integer> rankValues = new HashMap<>();
@@ -132,7 +175,6 @@ public class PokerHandEvaluator {
         rankValues.put("Queen", 12);
         rankValues.put("King", 13);
         rankValues.put("Ace", 14);
-
 
         return rankValues.get(card.getRank());
     }
