@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PokerHandEvaluatorTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="Five-card-app" />
+    <option name="PACKAGE_NAME" value="com.advance.fivecardapp" />
+    <option name="MAIN_CLASS_NAME" value="com.advance.fivecardapp.PokerHandEvaluatorTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
