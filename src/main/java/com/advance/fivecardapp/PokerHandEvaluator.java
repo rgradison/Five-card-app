@@ -52,7 +52,7 @@ public class PokerHandEvaluator {
     }
 
     public String evaluateHand(List<Card> hand) {
-        System.out.println("Hand baba :" + hand);
+        System.out.println("Hand :" + hand);
 
         if (isStraightFlush(hand)) {
             return "Straight Flush";
